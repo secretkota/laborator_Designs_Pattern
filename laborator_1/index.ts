@@ -52,6 +52,18 @@ class FieldMask {
     isVisible(bit: MaskBits): boolean {
         return (this.mask & bit) !== 0
     }
+
+    merge(other: FieldMask) {
+        this.mask |= other.mask
+    }
+
+    intersect(other: FieldMask) {
+        this.mask &= other.mask
+    }
+
+    invert() {
+        this.mask = ~this.mask & 0b11111
+    }
 }
 
 class StudentDB {
@@ -86,3 +98,4 @@ mask.hide(MaskBits.LastName)
 const found = db.findByFirstName('Alex')
 found.forEach(s=> StudentDB.print(s, mask))
 
+export { Student, StudentDB, FieldMask, MaskBits, LessonType }
