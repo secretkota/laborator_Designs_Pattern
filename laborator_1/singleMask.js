@@ -1,5 +1,12 @@
 
-type LessonType = "Math" | "Physics" | "Chemistry" | "History" | "Literature"
+enum LessonType {
+    Math = "Math",
+    Physics = "Physics",
+    Chemistry = "Chemistry",
+    History = "History",
+    Literature = "Literature"
+}
+
 
 class Student {
     firstname: string;
@@ -47,14 +54,22 @@ class StudentDB {
     }
 }
 
+enum MaskBits {
+    FirstName = 1 << 0,
+    LastName = 1 << 1,
+    Age = 1 << 2,
+    Lesson = 1 << 3,
+    Grade = 1 << 4
+}
 
 const db = new StudentDB()
-db.add(new Student('Alex', 'Smith', 20, "Literature", 9.5));
+db.add(new Student('Alex', 'Smith', 20, LessonType.Physics, 9.5));
 
 
 const mask = new FieldMask()
-mask.showAge = false
+mask.showAge = true
 mask.showLastname = false
+mask.showGrade = false
 
 const found = db.findByFirstName('Alex')
 found.forEach(s=> StudentDB.print(s, mask))
