@@ -1,18 +1,16 @@
-﻿void MainFunction()
-{
-    var a = List<int>[1, 2, 3, 4, 5];
-    var b = List<int>[1, 2, 3, 4, 5];
+﻿{
+    int[] a = [1, 2, 3, 4, 5];
+    int[] b = [1, 2, 3, 4, 5];
+    int[] c = new int[a.Length];
+    AddSum(a, b, c);
 
-    Console.WriteLine(AddSum(a, b));
-};
+    
+}
 
-int AddSum(int a, int b)
+void AddSum(int[] a, int[] b, int[] c)
 {
-    var c = 0;
-    for (var i = 0; i < a.Count; i++)
+    for (var i = 0; i < a.Length; i++)
     {
-        c = a[i] + b[i];
+        c[i] = a[i] + b[i];
     }
-
-    return c;
 }
