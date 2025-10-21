@@ -1,25 +1,34 @@
-﻿var library = new Library();
-library.books = new Book[5];
+﻿var library = new Library
+{
+    books = new Book[5],
+};
 
-library.books[0] = new Book { name = "testBook1", year = 1929, status = true };
+library.books[0] = new Book { name = "test", year = 1929, status = true };
 library.books[1] = new Book { name = "testBook2", year = 1930, status = true };
 library.books[2] = new Book { name = "testBook3", year = 1931, status = true };
 library.books[3] = new Book { name = "testBook4", year = 1932, status = true };
 library.books[4] = new Book { name = "testBook5", year = 1933, status = false };
+
+foreach (var b in library.books)
+{
+    Console.WriteLine(b.name.Length);
+}
 
 library.ShowAllBook();
 
 library.TakeBook("testBook3");
 library.ShowAllBook();
 
-// library.ReturnBook("testBook3");
-// library.ShowAllBook();
 
 library.BusyBook();
 
+library.ReturnBook("testBook3");
+library.ShowAllBook();
+
+library.BusyBook();
 class Library
 {
-    public Book[] books;
+    public required Book[] books;
 
     public void ShowAllBook()
     {
@@ -45,8 +54,10 @@ class Library
                 Console.WriteLine($"Ты взял книгу {book.name}");
                 return;
             }
-            Console.WriteLine("Книга не найдена");
         }
+
+        Console.WriteLine("Книга не найдена");
+        return;
     }
     public void ReturnBook(string name)
     {
@@ -63,8 +74,9 @@ class Library
                 Console.WriteLine($"Вы вернули книгу {book.name}");
                 return;
             }
-            Console.WriteLine("Книга не найдена");
         }
+        Console.WriteLine("Книга не найдена");
+        return;
     }
     public void BusyBook()
     {
@@ -77,7 +89,7 @@ class Library
                 busyBook.Add(book.name);
             }
         }
-    
+
 
         Console.WriteLine("Занятые книги:");
 
@@ -90,7 +102,7 @@ class Library
 
 class Book
 {
-    public string name;
+    public required string name;
     public int year;
     public bool status;
 }
